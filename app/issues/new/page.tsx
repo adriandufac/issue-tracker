@@ -8,8 +8,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod"; // zodResolver is a hook that allows us to use Zod schemas with react-hook-form and have client validation
 import { createIssueSchema } from "@/app/validationSchemas";
-import { z } from "zod";
+import { set, z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
+import Spinner from "@/app/components/Spinner";
 
 type NewIssueForm = z.infer<typeof createIssueSchema>; // creating type directly from Zod schema
 
@@ -24,6 +25,7 @@ const NewIssuePage = () => {
   });
   const router = useRouter();
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   return (
     <div className="max-w-xl">
       {error && (
@@ -35,9 +37,11 @@ const NewIssuePage = () => {
         className="max-w-xl space-y-3"
         onSubmit={handleSubmit(async (data) => {
           try {
+            setIsSubmitting(true);
             await axios.post("/api/issues", data);
             router.push("/issues");
           } catch (error) {
+            setIsSubmitting(false);
             setError("An error occurred while creating the issue");
           }
         })}
@@ -56,7 +60,9 @@ const NewIssuePage = () => {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
-        <Button>Submit New Issue</Button>
+        <Button disabled={isSubmitting}>
+          Submit New Issue{isSubmitting && <Spinner></Spinner>}
+        </Button>
       </form>
     </div>
   );
