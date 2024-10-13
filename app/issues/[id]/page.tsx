@@ -13,6 +13,7 @@ const IssueDetailPage = async ({ params }: IssueDetailPageProps) => {
   if (Number.isNaN(parseInt(params.id))) {
     return notFound();
   }
+
   const issue = await prisma.issue.findUnique({
     where: {
       id: parseInt(params.id),
