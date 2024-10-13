@@ -1,17 +1,20 @@
 "use client";
 import { Button, TextField, Callout, Text } from "@radix-ui/themes";
-import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import { useForm, Controller } from "react-hook-form";
+import dynamic from "next/dynamic";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod"; // zodResolver is a hook that allows us to use Zod schemas with react-hook-form and have client validation
 import { createIssueSchema } from "@/app/validationSchemas";
-import { set, z } from "zod";
+import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
-import delay from "delay";
+
+const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+}); // import SimpleMDE dynamically to avoid server side rendering issues since it uses the client side functions
 
 type NewIssueForm = z.infer<typeof createIssueSchema>; // creating type directly from Zod schema
 
