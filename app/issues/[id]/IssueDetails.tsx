@@ -12,7 +12,7 @@ const IssueDetails = ({ issue }: { issue: Issue }) => {
         <IssueStatusBadge status={issue.status}></IssueStatusBadge>
         <Text>{issue.createdAt.toLocaleDateString()}</Text>
       </Flex>
-      <Card className="prose" mt="4">
+      <Card className="prose max-w-full" mt="4">
         <ReactMarkdown>{issue.description}</ReactMarkdown>
         {/*by default tailwind doiesnt style lists so we installed tailwindcss/typography plugin  and the class prose is to tell that this container need to style lists*/}
       </Card>
