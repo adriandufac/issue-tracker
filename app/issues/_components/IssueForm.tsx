@@ -1,7 +1,7 @@
 "use client";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
-import { createIssueSchema } from "@/app/validationSchemas";
+import { issueSchema } from "@/app/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod"; // zodResolver is a hook that allows us to use Zod schemas with react-hook-form and have client validation
 import { Issue } from "@prisma/client";
 import { Button, Callout, TextField } from "@radix-ui/themes";
@@ -17,7 +17,7 @@ const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 }); // import SimpleMDE dynamically to avoid server side rendering issues since it uses the client side functions
 
-type NewIssueFormData = z.infer<typeof createIssueSchema>; // creating type directly from Zod schema
+type NewIssueFormData = z.infer<typeof issueSchema>; // creating type directly from Zod schema
 
 const IssueForm = ({ issue }: { issue?: Issue }) => {
   const {
@@ -26,7 +26,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
     handleSubmit,
     formState: { errors },
   } = useForm<NewIssueFormData>({
-    resolver: zodResolver(createIssueSchema),
+    resolver: zodResolver(issueSchema),
   });
   const router = useRouter();
   const [error, setError] = useState("");
