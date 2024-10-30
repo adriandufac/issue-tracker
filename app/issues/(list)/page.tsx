@@ -50,7 +50,6 @@ export const metadata: Metadata = {
   description: "View all the project issues",
   /* openGraph: {}, To do to have better sharing on social media
   twitter: {}, */
-  authors: [{ name: "Adrian Dufac" }],
   creator: "Adrian Dufac",
 };
 export default IssuePage;
