@@ -4,6 +4,7 @@ import Pagination from "../_components/Pagination";
 import IssueActions from "./IssueActions";
 import IssueTable, { IssueQuery, columnNames } from "./IssueTable";
 import { Flex } from "@radix-ui/themes";
+import { Metadata } from "next";
 
 const IssuePage = async ({ searchParams }: { searchParams: IssueQuery }) => {
   const statuses = Object.values(Status).toString();
@@ -44,5 +45,12 @@ const IssuePage = async ({ searchParams }: { searchParams: IssueQuery }) => {
     </Flex>
   );
 };
-
+export const metadata: Metadata = {
+  title: "Issue Tracker - Issues List",
+  description: "View all the project issues",
+  /* openGraph: {}, To do to have better sharing on social media
+  twitter: {}, */
+  authors: [{ name: "Adrian Dufac" }],
+  creator: "Adrian Dufac",
+};
 export default IssuePage;
