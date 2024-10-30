@@ -4,12 +4,12 @@ import Link from "next/link";
 import React from "react";
 
 interface IssueSummaryProps {
-  open: number;
-  inProgress: number;
-  closed: number;
+  issuesStatus: { open: number; inProgress: number; closed: number };
 }
 
-const IssueSummary = ({ open, inProgress, closed }: IssueSummaryProps) => {
+const IssueSummary = ({
+  issuesStatus: { open, inProgress, closed },
+}: IssueSummaryProps) => {
   const containers: { label: string; value: number; status: Status }[] = [
     { label: "Open Issues", value: open, status: "OPEN" },
     { label: "In-progress Issues", value: inProgress, status: "IN_PROGRESS" },
