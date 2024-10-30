@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 import { issueSchema } from "../../validationSchemas";
@@ -21,12 +20,3 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json(newIssue, { status: 201 });
 }
-=======
-import { NextRequest } from "next/server";
-
-
-export async function POST(request: NextRequest) {
-
-    const body = await request.json();
-}
->>>>>>> 3c7b31a (building api)
