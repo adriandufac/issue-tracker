@@ -23,7 +23,11 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
         assignedToUserId: userId === "notassigned" ? null : userId,
       });
     } catch (error) {
-      toast.error("Could not assign user");
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error("Could not assign user: " + error.response.data.message);
+      } else {
+        toast.error("Could not assign user");
+      }
     }
   };
   return (
@@ -34,7 +38,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
       >
         <Select.Trigger placeholder="Assign ..." />
         <Select.Content>
-          <Select.Group>
+          <Select.Group key="grp1">
             <Select.Label>Suggestions</Select.Label>
             <Select.Item value="notassigned">Unassigned</Select.Item>
             {users?.map((user) => (

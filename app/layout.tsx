@@ -9,24 +9,12 @@ import { Inter } from "next/font/google";
 
 import { Container, Theme } from "@radix-ui/themes";
 import AuthProvider from "./auth/Provider";
-import { Query, QueryClient } from "@tanstack/react-query";
 import QueryClientProvider from "./QueryClientProvider";
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
-});
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
 });
 
 export const metadata: Metadata = {

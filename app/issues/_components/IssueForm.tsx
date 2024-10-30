@@ -44,7 +44,14 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       router.push("/issues");
     } catch (error) {
       setIsSubmitting(false);
-      setError("An error occurred while creating the issue");
+      if (axios.isAxiosError(error) && error.response) {
+        setError(
+          "An error occurred while creating the issue: " +
+            error.response.data.message
+        );
+      } else {
+        setError("An error occurred while creating the issue");
+      }
     }
   });
 
