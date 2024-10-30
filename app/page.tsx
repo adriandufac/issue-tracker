@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import IssueChart from "./IssueChart";
 import IssueSummary from "./IssueSummary";
 import LatestIssues from "./LatestIssues";
+import { revalidatePath } from "next/cache";
 
 export default async function Home() {
   const open = await prisma.issue.count({ where: { status: "OPEN" } });
@@ -13,6 +14,7 @@ export default async function Home() {
   const closed = await prisma.issue.count({ where: { status: "CLOSED" } });
 
   const issuesStatus = { open: open, inProgress: inProgress, closed: closed };
+  revalidatePath("/");
   return (
     <Grid columns={{ initial: "1", md: "2" }} gap="5">
       <Flex direction="column" gap="5">
